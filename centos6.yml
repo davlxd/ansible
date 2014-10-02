@@ -7,12 +7,10 @@
 
   roles:
     - { role: mivok0.sudo, sudo_users: [root, "{{current_user}}"], sudo_nopasswd: false }
+    - common-pkgs
+    - config-files
 
   tasks:
-    - name: Install unility pkgs
-      yum: name={{ item }} state=latest
-      with_items: [vim, unzip, lynx, dos2unix]
-
     - name: Install libs
       yum: name={{ item }} state=latest
       with_items: [gcc, kernel-headers, kernel-devel]

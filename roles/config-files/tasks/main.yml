@@ -1,0 +1,5 @@
+---
+
+- name: Init ~/.gitconfig
+  copy: src=_gitconfig dest=/home/{{ current_user }}/.gitconfig
+

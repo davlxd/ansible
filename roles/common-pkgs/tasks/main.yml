@@ -1,0 +1,4 @@
+---
+- name: Install unility pkgs
+  yum: name={{ item }} state=latest
+  with_items: [vim, unzip, lynx, dos2unix, tree]
