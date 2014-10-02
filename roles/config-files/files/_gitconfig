@@ -14,5 +14,3 @@
 [user]
 	name = lxd
 	email = xdli@thoughtworks.com
-[push]
-	default = simple
