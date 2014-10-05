@@ -1,6 +1,8 @@
 ---
-- name: Prepare dir
+- name: Prepare dir ~/sw-pkg
   file: dest=/home/{{current_user}}/sw-pkg state=directory
+
+- name: Prepare dir ~/App
   file: dest=/home/{{current_user}}/App state=directory
 
 - name: Download ant
