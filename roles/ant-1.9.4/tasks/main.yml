@@ -12,4 +12,7 @@
   unarchive: src=/home/{{ current_user }}/sw-pkg/apache-ant-bin.tar.gz dest=/home/{{current_user}}/App/
 
 - name: Configure ANT_HOME
-  lineinfile: dest=/home/{{ current_user }}/{{ rcfile }} line="export JAVA_HOME=/home/{{current_user}}/App/apache-ant-1.9.4"
+  lineinfile: dest=/home/{{ current_user }}/{{ rcfile }} line="export ANT_HOME=/home/{{current_user}}/App/apache-ant-1.9.4"
+
+- name: Configure ANT_HOME/bin to PATH
+  lineinfile: dest=/home/{{ current_user }}/{{ rcfile }} line="export PATH=\"/home/{{current_user}}/App/apache-ant-1.9.4/bin:$PATH\""
