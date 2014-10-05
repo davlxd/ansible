@@ -1,4 +1,8 @@
 ---
+- name: Prepare dir
+  file: dest=/home/{{current_user}}/sw-pkg state=directory
+  file: dest=/home/{{current_user}}/App state=directory
+
 - name: Download ant
   get_url: url=http://mirrors.hust.edu.cn/apache//ant/binaries/apache-ant-1.9.4-bin.tar.gz dest=/home/{{ current_user }}/sw-pkg/apache-ant-bin.tar.gz
 
