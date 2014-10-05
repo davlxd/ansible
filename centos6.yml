@@ -4,17 +4,17 @@
   hosts: localhost
   vars:
     current_user: 'twer'
+    rcfile: '.bashrc'
 
   roles:
     - { role: mivok0.sudo, sudo_users: [root, "{{current_user}}"], sudo_nopasswd: false }
     - common-pkgs
     - config-files
-    - openjdk1.7
+    - openjdk-1.7
+    - ant-1.9.4
 
   tasks:
     - name: Install libs
       yum: name={{ item }} state=latest
       with_items: [gcc, kernel-headers, kernel-devel]
 
-    - name: Install JDK
-      yum: name=java-1.7.0-openjdk state=latest

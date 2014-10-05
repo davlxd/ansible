@@ -1,4 +1,0 @@
----
-- name: Download ant
-  yum: name={{ item }} state=latest
-  with_items: [git, vim, unzip, lynx, dos2unix, tree, tmux]
