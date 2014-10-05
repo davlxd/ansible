@@ -3,3 +3,5 @@
 - name: Init ~/.gitconfig
   copy: src=_gitconfig dest=/home/{{ current_user }}/.gitconfig
 
+- name: Init ~/.tmux.conf
+  copy: src=_tmux.conf dest=/home/{{ current_user }}/.tmux.conf

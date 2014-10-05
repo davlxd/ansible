@@ -14,3 +14,6 @@
     - name: Install libs
       yum: name={{ item }} state=latest
       with_items: [gcc, kernel-headers, kernel-devel]
+
+    - name: Install JDK
+      yum: name=java-1.7.0-openjdk state=latest
