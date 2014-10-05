@@ -11,6 +11,9 @@
 - name: unarchive
   unarchive: src=/home/{{ current_user }}/sw-pkg/apache-ant-bin.tar.gz dest=/home/{{current_user}}/App/
 
+- name: Configure JAVA_HOME
+  lineinfile: dest=/home/{{ current_user }}/{{ rcfile }} line="export JAVA_HOME=/usr/lib/jvm/java-1.7.0"
+
 - name: Configure ANT_HOME
   lineinfile: dest=/home/{{ current_user }}/{{ rcfile }} line="export ANT_HOME=/home/{{current_user}}/App/apache-ant-1.9.4"
 

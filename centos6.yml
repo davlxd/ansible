@@ -1,6 +1,6 @@
 ---
 
-- name: Setup CentOS6 on local host
+- name: Setup CentOS6 on local host as root
   hosts: localhost
   vars:
     current_user: 'twer'
@@ -9,12 +9,20 @@
   roles:
     - { role: mivok0.sudo, sudo_users: [root, "{{current_user}}"], sudo_nopasswd: false }
     - common-pkgs
-    - config-files
     - openjdk-1.7
-    - ant-1.9.4
 
   tasks:
     - name: Install libs
       yum: name={{ item }} state=latest
       with_items: [gcc, kernel-headers, kernel-devel]
+
+- name: Setup CentOS6 on local host as user
+  hosts: localhost
+  vars:
+    current_user: 'twer'
+    rcfile: '.bashrc'
+
+  roles:
+    - config-files
+    - ant-1.9.4
 
