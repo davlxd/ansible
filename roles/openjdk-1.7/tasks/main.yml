@@ -3,4 +3,4 @@
   yum: name=java-1.7.0-openjdk-devel state=latest
 
 - name: Configure JAVA_HOME
-  inline: dest=/home/{{ current_user }}/{{ rc_file }} line="export JAVA_HOME=/usr/lib/jvm/java-1.7.0"
+  lineinfile: dest=/home/{{ current_user }}/{{ rc_file }} line="export JAVA_HOME=/usr/lib/jvm/java-1.7.0"
