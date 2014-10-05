@@ -9,6 +9,7 @@
     - { role: mivok0.sudo, sudo_users: [root, "{{current_user}}"], sudo_nopasswd: false }
     - common-pkgs
     - config-files
+    - openjdk1.7
 
   tasks:
     - name: Install libs
