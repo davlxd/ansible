@@ -2,9 +2,6 @@
 
 - name: Setup CentOS6 on local host as root
   hosts: localhost
-  vars:
-    current_user: 'twer'
-    rcfile: '.bashrc'
 
   roles:
     - { role: mivok0.sudo, sudo_users: [root, "{{current_user}}"], sudo_nopasswd: false }
@@ -21,6 +18,8 @@
   vars:
     current_user: 'twer'
     rcfile: '.bashrc'
+  sudo: yes
+  sudo_user: "{{current_user}}"
 
   roles:
     - config-files

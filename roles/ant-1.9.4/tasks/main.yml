@@ -19,3 +19,6 @@
 
 - name: Configure ANT_HOME/bin to PATH
   lineinfile: dest=/home/{{ current_user }}/{{ rcfile }} line="export PATH=\"/home/{{current_user}}/App/apache-ant-1.9.4/bin:$PATH\""
+
+- name: fetch ant lib
+  shell: source /home/{{current_user}}/{{rcfile}} && cd $ANT_HOME && ant -f fetch.xml -Ddest=system
