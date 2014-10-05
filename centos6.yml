@@ -2,6 +2,8 @@
 
 - name: Setup CentOS6 on local host as root
   hosts: localhost
+  vars:
+    current_user: 'twer'
 
   roles:
     - { role: mivok0.sudo, sudo_users: [root, "{{current_user}}"], sudo_nopasswd: false }
