@@ -1,0 +1,71 @@
+#
+# Alter vars: before run this following line
+#
+# $ ansible-playbook mysql.yml -i localhost, -c local -K
+#
+---
+- hosts: all
+
+  vars:
+    mysql_root_password: drowssap_toor_lqsym
+    mysql_normal_username: username
+    mysql_normal_password: password
+    mysql_normal_database: default
+    mysql_normal_remotehost: '192.168.33.%'
+
+  tasks:
+  - name: install mysql-server
+    sudo: yes
+    apt: name={{ item }} update_cache=yes cache_valid_time=3600 state=present
+    with_items: [python-mysqldb, mysql-server]
+
+  - name: alter my.cnf configuration entry bind-address and a bunch of utf8 settings
+    sudo: yes
+    template: src=my.cnf dest=/etc/mysql/my.cnf backup=yes
+
+  - name: start MySQL
+    sudo: yes
+    service: name=mysql state=started enabled=true
+
+  - name: update MySQL root password for all root accounts
+    mysql_user: 
+      name: root 
+      host: "{{ item }}" 
+      password: "{{ mysql_root_password }}"
+      login_user: root
+      login_password: "{{ mysql_root_password }}"
+      check_implicit_admin: yes
+      priv: "*.*:ALL,GRANT"
+      state: present
+    with_items:
+      - "{{ ansible_hostname }}"
+      - 127.0.0.1
+      - ::1
+      - localhost
+
+  - name: create database
+    mysql_db:
+      name: "{{ mysql_normal_database }}"
+      login_user: root
+      login_password: "{{ mysql_root_password }}"
+      encoding: utf8
+      collation: utf8_general_ci
+      state: present
+
+  - name: grant priv for normal user
+    mysql_user:
+      name: "{{ mysql_normal_username }}"
+      host: "{{ item }}"
+      password: "{{ mysql_normal_password }}"
+      login_user: root
+      login_password: "{{ mysql_root_password }}"
+      priv: "{{mysql_normal_database}}.*:ALL"
+      state: present
+    with_items:
+      - "{{ ansible_hostname }}"
+      - 127.0.0.1
+      - ::1
+      - localhost
+      - "{{ mysql_normal_remotehost}}"
+
+      
